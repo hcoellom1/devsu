@@ -1,27 +1,24 @@
 package hn.devsu.excersice.clientes.entities;
 
 import lombok.Data;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 
 @Entity
 @Table(name="persona")
-@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 public class Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="idPersona")
+    private Integer id;
 
-    private String nombre;
-
-    private String appelido;
+    private String nombre;    
 
     private String genero;
     
@@ -30,6 +27,5 @@ public class Persona {
     private String direccion;
 
     private String telefono;
-
 
 }

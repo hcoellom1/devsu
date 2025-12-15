@@ -2,20 +2,19 @@ USE clientes;
 
 create table persona(
   idPersona int auto_increment primary key,
-  nombre varchar(50),
-  apellido varchar(50),
+  nombre varchar(100),  
   genero varchar(15),
   edad int,
   direccion varchar(200),
   telefono varchar(150)
 );
 
-create table cliente(
-  idPersona int primary key,
-  idCliente int auto_increment unique not null,
+create table cliente(  
+  idCliente int auto_increment primary key,
+  idPersona int not null,
   contrasenia varchar(100),
   estado smallint,
-  foreign key (idPersona) references persona(dni)
+  foreign key (idPersona) references persona(idPersona)
 );
 
 create table cuenta(
@@ -24,11 +23,11 @@ create table cuenta(
   saldoInicial decimal(14,2),
   saldoActual decimal(14,2),
   estado smallint,
-  idPersona int,
-  foreign key (idPersona) references cliente(idPersona)
+  idCliente int,
+  foreign key (idCliente) references cliente(idCliente)
 );
 
-create table movimientos(
+create table movimiento(
   idMovimiento int auto_increment primary key,
   numeroCuenta int,
   fechaMovimiento datetime,
