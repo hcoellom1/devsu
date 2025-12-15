@@ -124,6 +124,8 @@ public class ClienteServices {
         clienteActualizar.getPersona().setEdad(cliente.getEdad());
         clienteActualizar.setContrasenia(cliente.getContrasenia());
         clienteActualizar.setEstado(cliente.isEstado());
+
+        clienteRepository.save(clienteActualizar);
         
         return "Se ha actualizado el cliente: " +clienteActualizar.getId();
 
