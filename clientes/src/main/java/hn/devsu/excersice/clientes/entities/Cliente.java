@@ -29,7 +29,7 @@ public class Cliente{
 
     private boolean estado;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="id_persona", nullable = false)
     private Persona persona;
 

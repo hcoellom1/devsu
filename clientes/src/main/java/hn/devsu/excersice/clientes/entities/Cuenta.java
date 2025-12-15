@@ -29,8 +29,6 @@ public class Cuenta {
 
     private double saldoInicial;
 
-    private double saldoActual;
-
     private boolean estado;
 
     @ManyToOne

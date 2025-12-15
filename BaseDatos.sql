@@ -20,8 +20,7 @@ create table cliente(
 create table cuenta(
   numeroCuenta int auto_increment primary key,
   tipoCuenta varchar(10),
-  saldoInicial decimal(14,2),
-  saldoActual decimal(14,2),
+  saldoInicial decimal(14,2),  
   estado smallint,
   idCliente int,
   foreign key (idCliente) references cliente(idCliente)
