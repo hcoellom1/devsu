@@ -1,6 +1,9 @@
 package hn.devsu.excersice.clientes.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import hn.devsu.excersice.clientes.services.ClienteServices;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +21,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/api/clientes")
 
 public class ClientesController {
-    
+
+    private final ClienteServices clienteServices;
+
+    public ClientesController(ClienteServices clienteServices){
+        this.clienteServices = clienteServices;
+    }
 
     @PostMapping("/crear")
     public String crearCliente(@RequestBody String entity) {
