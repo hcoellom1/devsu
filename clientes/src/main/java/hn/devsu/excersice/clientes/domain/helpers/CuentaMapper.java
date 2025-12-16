@@ -15,6 +15,7 @@ public class CuentaMapper {
         if(cuenta==null) return null;
 
         CuentaEntity nvaCuentaEntity = new CuentaEntity();
+        nvaCuentaEntity.setNumeroCuenta(cuenta.getNumeroCuenta());
         nvaCuentaEntity.setEstado(cuenta.isEstado());
         nvaCuentaEntity.setSaldoInicial(cuenta.getSaldoInicial());
         nvaCuentaEntity.setTipoCuenta(cuenta.getTipoCuenta());
@@ -29,6 +30,7 @@ public class CuentaMapper {
                                             return movimientoEntity;
                                         }).toList();
         nvaCuentaEntity.setMovimientos(movimientos);
+        nvaCuentaEntity.setCliente(ClienteMapper.mapearDominioEntidad(cuenta.getCliente()));
         return nvaCuentaEntity;
 
     }
@@ -40,6 +42,7 @@ public class CuentaMapper {
         nvaCuentaDominio.setEstado(cuenta.isEstado());
         nvaCuentaDominio.setSaldoInicial(cuenta.getSaldoInicial());
         nvaCuentaDominio.setNumeroCuenta(cuenta.getNumeroCuenta());
+        nvaCuentaDominio.setTipoCuenta(cuenta.getTipoCuenta());
 
         if(!cuenta.getMovimientos().isEmpty()){
             List<Movimiento> movimientos = cuenta.getMovimientos().stream()                                
@@ -51,9 +54,10 @@ public class CuentaMapper {
                                     return mov;
                                 }).toList();
 
-            movimientos.forEach(nvaCuentaDominio::registrarMovimiento);
-                                
+            movimientos.forEach(nvaCuentaDominio::registrarMovimiento);                                
+
         }
+        nvaCuentaDominio.setCliente(ClienteMapper.mapearEntidadDominio(cuenta.getCliente()));
         return nvaCuentaDominio;
     }
 }

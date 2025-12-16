@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import hn.devsu.excersice.clientes.domain.Cuenta;
+import hn.devsu.excersice.clientes.domain.exception.NotCuentaFoundException;
 import hn.devsu.excersice.clientes.domain.helpers.CuentaMapper;
 import hn.devsu.excersice.clientes.domain.repository.CuentaRepository;
 import hn.devsu.excersice.clientes.infraestructure.entity.CuentaEntity;
@@ -50,6 +51,10 @@ public class CuentaRepositoryAdapter implements CuentaRepository{
 
     @Override
     public String deleteById(int id) {
+        if(!jpaRepository.existsById(id)){
+            throw new NotCuentaFoundException(id);
+        }
+        
         jpaRepository.deleteById(id);
         return "Se ha eliminado la cuenta: " + id;        
     }

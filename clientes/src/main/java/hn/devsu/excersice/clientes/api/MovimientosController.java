@@ -19,8 +19,8 @@ public class MovimientosController {
     }
 
     @PostMapping("/registrar")
-    public void registrarMovimiento(@RequestParam int cuenta, @RequestParam double valor) {
-        movimientoService.registrarMovimiento(cuenta, valor);        
+    public String registrarMovimiento(@RequestParam int cuenta, @RequestParam double valor) {
+        return movimientoService.registrarMovimiento(cuenta, valor);        
     }
     
     

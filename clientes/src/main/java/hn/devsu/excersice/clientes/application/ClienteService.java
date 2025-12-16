@@ -123,12 +123,23 @@ public class ClienteService {
         Cliente clienteActualizar = clienteRepository.findById(idCliente)
                 .orElseThrow(() -> new NotClientFoundException(idCliente));
 
-                clienteActualizar.getPersona().setNombre(cliente.getNombre());
-        clienteActualizar.getPersona().setTelefono(cliente.getTelefono());
-        clienteActualizar.getPersona().setDireccion(cliente.getDireccion());
-        clienteActualizar.getPersona().setEdad(cliente.getEdad());
-        clienteActualizar.setContrasenia(cliente.getContrasenia());
-        clienteActualizar.setEstado(cliente.isEstado());
+        if(cliente.getNombre() != null && !cliente.getNombre().equals(""))
+            clienteActualizar.getPersona().setNombre(cliente.getNombre());
+
+        if(cliente.getTelefono() != null && !cliente.getTelefono().equals(""))
+            clienteActualizar.getPersona().setTelefono(cliente.getTelefono());
+
+        if(cliente.getDireccion()!= null && !cliente.getDireccion().equals(""))            
+            clienteActualizar.getPersona().setDireccion(cliente.getDireccion());
+
+        if(cliente.getEdad() != 0)            
+            clienteActualizar.getPersona().setEdad(cliente.getEdad());
+
+        if(cliente.getContrasenia()!= null && !cliente.getContrasenia().equals(""))
+            clienteActualizar.setContrasenia(cliente.getContrasenia());
+        
+        if(cliente.isEstado())
+            clienteActualizar.setEstado(cliente.isEstado());
 
         clienteRepository.save(clienteActualizar);
 

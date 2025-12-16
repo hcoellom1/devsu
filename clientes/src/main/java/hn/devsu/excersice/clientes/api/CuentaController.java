@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,9 +34,24 @@ public class CuentaController {
     }
 
     @GetMapping("/reportes")
-    public List<CuentaDto> generarReporteCuenta(@RequestParam LocalDateTime fechaInicio, @RequestParam LocalDateTime fechaFin, @RequestParam int idCliente) {
+    public List<CuentaDto> generarReporteCuenta(@RequestParam String fechaInicio, @RequestParam String fechaFin, @RequestParam int idCliente) {        
         return cuentaService.generarEstadoCuenta(fechaInicio, fechaFin, idCliente);
         
+    }
+
+    @GetMapping("/obtener/{id}")
+    public CuentaDto obtenerCuentaPorId(@PathVariable("id") int idCuenta) {
+        return cuentaService.obtenerCuentaPorId(idCuenta);
+    }
+
+    @GetMapping("/obtener/todas")
+    public List<CuentaDto> obtenerTodasCuentas(){
+        return cuentaService.obtenerTodasCuentas();
+    }
+    
+    @DeleteMapping("/eliminar/{id}")
+    public String eliminarCuentaPorId(@PathVariable("id") int id){
+        return cuentaService.eliminarCuenta(id);
     }
     
     

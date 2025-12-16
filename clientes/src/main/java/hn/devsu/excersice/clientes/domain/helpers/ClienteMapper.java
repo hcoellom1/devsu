@@ -56,7 +56,7 @@ public class ClienteMapper {
         Cliente nvoCliente = new Cliente();
         nvoCliente.setId(clienteEntity.getId());
         nvoCliente.setContrasenia(clienteEntity.getContrasenia());
-    
+        nvoCliente.setEstado(clienteEntity.isEstado());
         if(clienteEntity.getPersonaEntity()!= null){
             Persona persona = new Persona();
             persona.setId(clienteEntity.getPersonaEntity().getId());
@@ -72,12 +72,7 @@ public class ClienteMapper {
         List<Cuenta> cuentas = new ArrayList<>();
         if(clienteEntity.getCuentas()!=null){
             for(CuentaEntity ce: clienteEntity.getCuentas()){
-                Cuenta c = new Cuenta();
-                c.setNumeroCuenta(ce.getNumeroCuenta());
-                c.setEstado(ce.isEstado());
-                c.setTipoCuenta(ce.getTipoCuenta());
-                c.setSaldoInicial(ce.getSaldoInicial());
-                
+                Cuenta c = CuentaMapper.mapearAdominio(ce);
                 cuentas.add(c);
             }
 

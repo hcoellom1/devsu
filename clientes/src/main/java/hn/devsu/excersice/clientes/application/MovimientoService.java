@@ -18,7 +18,7 @@ public class MovimientoService {
         this.cuentaRepository = cuentaRepository;
     }
 
-    public void registrarMovimiento(int idCuenta, double valor){
+    public String registrarMovimiento(int idCuenta, double valor){
         Cuenta cuenta = cuentaRepository.findById(idCuenta).orElseThrow(() -> new NotCuentaFoundException(idCuenta));
 
         Movimiento movimiento = new Movimiento();
@@ -27,8 +27,11 @@ public class MovimientoService {
         
         
         cuenta.registrarMovimiento(movimiento);
+        
 
         cuentaRepository.save(cuenta);
+
+        return "El nuevo saldo de la cuenta es: " + cuenta.calcularSaldoActual();
 
 
     }

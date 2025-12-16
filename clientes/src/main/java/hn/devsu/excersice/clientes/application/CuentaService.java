@@ -1,5 +1,6 @@
 package hn.devsu.excersice.clientes.application;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -137,12 +138,15 @@ public class CuentaService {
         return "Se ha actualizado la cuenta: " + cuenta.getNumeroCuenta();        
     }
 
-    public List<CuentaDto> generarEstadoCuenta(LocalDateTime fechaInicio, LocalDateTime fechaFinal, int idCliente){
+    public List<CuentaDto> generarEstadoCuenta(String fechaInicio, String fechaFinal, int idCliente){
+
+        LocalDateTime fechaInicioCompleta = LocalDate.parse(fechaInicio).atStartOfDay();
+        LocalDateTime fechaFinCompleta = LocalDate.parse(fechaFinal).atStartOfDay();
 
         List<Cuenta> cuentas = cuentaRepository.findByClienteId(idCliente);
 
         return cuentas.stream().map(cuenta-> {
-            List<Movimiento> movimientosRango = movimientoRepository.findByNumeroCuentaAndFechaMovimiento(cuenta.getNumeroCuenta(), fechaInicio, fechaFinal);            
+            List<Movimiento> movimientosRango = movimientoRepository.findByNumeroCuentaAndFechaMovimiento(cuenta.getNumeroCuenta(), fechaInicioCompleta, fechaFinCompleta);            
 
             List<MovimientoDto> movimientosDto = movimientosRango.stream().map(m->new MovimientoDto(m.getId(), m.getFechaMovimiento(), m.getValor(), m.getSaldo())).toList();
 
@@ -156,6 +160,10 @@ public class CuentaService {
 
         }).toList();
 
+    }
+
+    public String eliminarCuenta(int idCuenta){
+        return cuentaRepository.deleteById(idCuenta);
     }
 
 

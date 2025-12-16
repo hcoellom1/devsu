@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ClienteDto {
-    private int codigoCliente;
+    private Integer codigoCliente;
     
     private String nombre;
 

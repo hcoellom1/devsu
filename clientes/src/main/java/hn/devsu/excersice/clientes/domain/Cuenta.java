@@ -27,6 +27,8 @@ public class Cuenta {
 
     private List<Movimiento> movimientos = new ArrayList<>();
 
+    private Cliente cliente;
+
     public double calcularSaldoActual(){
         return saldoInicial + Optional.ofNullable(movimientos)
                             .orElse(Collections.emptyList())
@@ -36,10 +38,11 @@ public class Cuenta {
     }
 
     public void registrarMovimiento(Movimiento movimiento){
-        double nuevoSaldo = calcularSaldoActual() + movimiento.getValor();
+        double nuevoSaldo = calcularSaldoActual();
         if(nuevoSaldo==0){
             throw new NotSaldoException(numeroCuenta);
         }
+        nuevoSaldo = calcularSaldoActual() + movimiento.getValor();
         movimiento.setSaldo(nuevoSaldo);
         movimientos.add(movimiento);
     }
