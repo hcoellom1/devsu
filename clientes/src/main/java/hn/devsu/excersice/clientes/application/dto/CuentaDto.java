@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CuentaDto {
     
-    private int numeroCuenta;
+    private Integer numeroCuenta;
 
     private String tipoCuenta;
 

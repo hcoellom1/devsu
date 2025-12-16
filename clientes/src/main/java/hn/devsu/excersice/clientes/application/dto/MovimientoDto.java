@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MovimientoDto {
     
-    private int idMovimiento;
+    private Integer idMovimiento;
 
     private LocalDateTime fechaMovimiento;
 

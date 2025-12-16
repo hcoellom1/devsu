@@ -16,7 +16,7 @@ public class ClienteDto {
 
     private String genero;
 
-    private int edad;
+    private Integer edad;
 
     private String direccion;
 
