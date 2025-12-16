@@ -1,7 +1,9 @@
 package hn.devsu.excersice.clientes.application;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -103,7 +105,7 @@ public class CuentaService {
         List<Cuenta> cuentas = cuentaRepository.findAll();
 
         return cuentas.stream().map(cuenta-> {
-            List<MovimientoDto> movimientoDtos = cuenta.getMovimientos().stream()
+            List<MovimientoDto> movimientoDtos = Optional.ofNullable(cuenta.getMovimientos()).orElse(Collections.emptyList()).stream()
             .map(m->new MovimientoDto(m.getId(),
                     m.getFechaMovimiento(), 
                     m.getValor(),

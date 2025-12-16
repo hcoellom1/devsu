@@ -1,6 +1,8 @@
 package hn.devsu.excersice.clientes.application;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -42,10 +44,10 @@ public class ClienteService {
                                     .findById(id)
                                     .orElseThrow(() -> new RuntimeException("Cliente no existe"));
 
-        List<CuentaDto> cuentasDto = clienteBuscar.getCuentas()
+        List<CuentaDto> cuentasDto = Optional.ofNullable(clienteBuscar.getCuentas()).orElse(Collections.emptyList())
                                                   .stream()
             .map(cuenta-> {
-                List<MovimientoDto> movimientoDtos = cuenta.getMovimientos().stream()
+                List<MovimientoDto> movimientoDtos = Optional.ofNullable(cuenta.getMovimientos()).orElse(Collections.emptyList()).stream()
                         .map(m->new MovimientoDto(m.getId(),
                                                   m.getFechaMovimiento(), 
                                                   m.getValor(),
@@ -75,9 +77,9 @@ public class ClienteService {
     public List<ClienteDto> obtenerTodosCliente(){
         return clienteRepository.findAll().stream()
         .map(cliente -> {
-            List<CuentaDto> cuentasDto = cliente.getCuentas().stream()
+            List<CuentaDto> cuentasDto = Optional.ofNullable(cliente.getCuentas()).orElse(Collections.emptyList()).stream()
             .map(cuenta -> {
-                List<MovimientoDto> movimientoDtos = cuenta.getMovimientos().stream()
+                List<MovimientoDto> movimientoDtos = Optional.ofNullable(cuenta.getMovimientos()).orElse(Collections.emptyList()).stream()
                 .map(m-> new MovimientoDto(m.getId(), 
                                            m.getFechaMovimiento(), 
                                            m.getValor(), 
@@ -106,7 +108,7 @@ public class ClienteService {
                                   cuentasDto );
         }).toList();
 
-
+        
 
     }
 
