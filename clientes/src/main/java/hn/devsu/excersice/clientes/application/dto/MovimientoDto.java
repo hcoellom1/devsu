@@ -1,4 +1,4 @@
-package hn.devsu.excersice.clientes.dtos;
+package hn.devsu.excersice.clientes.application.dto;
 
 import java.time.LocalDateTime;
 

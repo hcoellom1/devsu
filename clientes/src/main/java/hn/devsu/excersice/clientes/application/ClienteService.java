@@ -26,7 +26,7 @@ public class ClienteService {
         nvaPersona.setNombre(cliente.getNombre());
         nvaPersona.setEdad(cliente.getEdad());
         nvaPersona.setGenero(cliente.getGenero());
-        nvaPersona.setDireccion(cliente.getDirecion());
+        nvaPersona.setDireccion(cliente.getDireccion());
         nvaPersona.setTelefono(cliente.getTelefono());
 
         Cliente nvoCliente = new Cliente();
@@ -122,7 +122,7 @@ public class ClienteService {
 
         clienteActualizar.getPersona().setNombre(cliente.getNombre());
         clienteActualizar.getPersona().setTelefono(cliente.getTelefono());
-        clienteActualizar.getPersona().setDireccion(cliente.getDirecion());
+        clienteActualizar.getPersona().setDireccion(cliente.getDireccion());
         clienteActualizar.getPersona().setEdad(cliente.getEdad());
         clienteActualizar.setContrasenia(cliente.getContrasenia());
         clienteActualizar.setEstado(cliente.isEstado());

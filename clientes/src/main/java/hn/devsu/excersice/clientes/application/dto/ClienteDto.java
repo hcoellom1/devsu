@@ -1,4 +1,4 @@
-package hn.devsu.excersice.clientes.dtos;
+package hn.devsu.excersice.clientes.application.dto;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class ClienteDto {
 
     private int edad;
 
-    private String direcion;
+    private String direccion;
 
     private String telefono;
 

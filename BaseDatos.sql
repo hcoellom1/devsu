@@ -1,7 +1,7 @@
 USE clientes;
 
 create table persona(
-  idPersona int auto_increment primary key,
+  id_persona int auto_increment primary key,
   nombre varchar(100),  
   genero varchar(15),
   edad int,
@@ -10,28 +10,28 @@ create table persona(
 );
 
 create table cliente(  
-  idCliente int auto_increment primary key,
-  idPersona int not null,
+  id_cliente int auto_increment primary key,
+  id_persona int not null,
   contrasenia varchar(100),
   estado smallint,
-  foreign key (idPersona) references persona(idPersona)
+  foreign key (id_persona) references persona(id_persona)
 );
 
 create table cuenta(
-  numeroCuenta int auto_increment primary key,
-  tipoCuenta varchar(10),
-  saldoInicial decimal(14,2),  
+  numero_cuenta int auto_increment primary key,
+  tipo_cuenta varchar(10),
+  saldo_inicial decimal(14,2),  
   estado smallint,
-  idCliente int,
-  foreign key (idCliente) references cliente(idCliente)
+  id_cliente int,
+  foreign key (id_cliente) references cliente(id_cliente)
 );
 
 create table movimiento(
-  idMovimiento int auto_increment primary key,
-  numeroCuenta int,
-  fechaMovimiento datetime,
+  id_movimiento int auto_increment primary key,
+  numero_cuenta int,
+  fecha_movimiento datetime,
   valor decimal(14,2),
   saldo decimal(14,2),
-  foreign key(numeroCuenta) references cuenta(numeroCuenta)
+  foreign key(numero_cuenta) references cuenta(numero_cuenta)
 );
   

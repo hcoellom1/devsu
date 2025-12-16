@@ -2,7 +2,6 @@ package hn.devsu.excersice.clientes.infraestructure.entity;
 
 import java.util.List;
 
-import hn.devsu.excersice.clientes.domain.Cuenta;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,18 +27,18 @@ public class ClienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idCliente")
+    @Column(name="id_cliente")
     private int id;
 
     private String contrasenia;
 
     private boolean estado;
 
-    @OneToOne
-    @JoinColumn(name="idPersona", nullable = false)
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="id_persona", nullable = false)
     private PersonaEntity personaEntity;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<Cuenta> cuentas;
+    public List<CuentaEntity> cuentas;
     
 }

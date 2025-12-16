@@ -27,11 +27,5 @@ public class Cliente {
         cuentas.add(cuenta);
     }
 
-    public void registrarMovimiento(Integer idCuenta, Movimiento movimiento){
-        Cuenta cuenta = cuentas.stream().filter(c->c.getNumeroCuenta()==idCuenta)
-        .findFirst()
-        .orElseThrow(()->new RuntimeException("Cuenta no encontrada"));
-
-        cuenta.registrarMovimiento(movimiento);
-    }
+    
 }

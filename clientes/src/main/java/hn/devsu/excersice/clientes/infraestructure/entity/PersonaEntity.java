@@ -21,7 +21,7 @@ public class PersonaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idPersona")
+    @Column(name="id_persona")
     private int id;
 
     private String nombre;

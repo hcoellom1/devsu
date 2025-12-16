@@ -9,7 +9,7 @@ import hn.devsu.excersice.clientes.domain.Movimiento;
 
 public interface MovimientoRepository {
     
-    List<Movimiento> getByClienteAndFecha(int idCliente, LocalDateTime inicio, LocalDateTime fechaFinal);
+    List<Movimiento> findByNumeroCuentaAndFechaMovimiento(int idCliente, LocalDateTime inicio, LocalDateTime fechaFinal);
 
     double sumarMovimientos(@Param("idcuenta") Integer idCuenta);
 }

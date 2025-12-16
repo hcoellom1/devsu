@@ -35,6 +35,7 @@ public class ClienteMapper {
 
         Cliente nvoCliente = new Cliente();
         nvoCliente.setId(clienteEntity.getId());
+        nvoCliente.setContrasenia(clienteEntity.getContrasenia());
     
         if(clienteEntity.getPersonaEntity()!= null){
             Persona persona = new Persona();

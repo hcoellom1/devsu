@@ -3,7 +3,7 @@ package hn.devsu.excersice.clientes.infraestructure.adapter;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import hn.devsu.excersice.clientes.domain.Cliente;
 import hn.devsu.excersice.clientes.domain.helpers.ClienteMapper;
@@ -11,7 +11,7 @@ import hn.devsu.excersice.clientes.domain.repository.ClienteRepository;
 import hn.devsu.excersice.clientes.infraestructure.entity.ClienteEntity;
 import hn.devsu.excersice.clientes.infraestructure.jparepository.ClienteJpaRepository;
 
-@Component
+@Repository
 public class ClienteRespositoryAdapter implements ClienteRepository{
 
     private final ClienteJpaRepository jpaRepository;

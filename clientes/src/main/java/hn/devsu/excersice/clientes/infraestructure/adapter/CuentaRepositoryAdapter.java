@@ -2,16 +2,19 @@ package hn.devsu.excersice.clientes.infraestructure.adapter;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import hn.devsu.excersice.clientes.domain.Cuenta;
 import hn.devsu.excersice.clientes.domain.helpers.CuentaMapper;
 import hn.devsu.excersice.clientes.domain.repository.CuentaRepository;
 import hn.devsu.excersice.clientes.infraestructure.entity.CuentaEntity;
 import hn.devsu.excersice.clientes.infraestructure.jparepository.CuentaJpaRepository;
 
+@Repository
 public class CuentaRepositoryAdapter implements CuentaRepository{
     
     private final CuentaJpaRepository jpaRepository;
-
+    
     public CuentaRepositoryAdapter(CuentaJpaRepository jpaRepository){
         this.jpaRepository = jpaRepository;
     }

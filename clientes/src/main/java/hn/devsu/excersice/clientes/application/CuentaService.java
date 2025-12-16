@@ -137,7 +137,7 @@ public class CuentaService {
         List<Cuenta> cuentas = cuentaRepository.findByClienteId(idCliente);
 
         return cuentas.stream().map(cuenta-> {
-            List<Movimiento> movimientosRango = movimientoRepository.getByClienteAndFecha(cuenta.getNumeroCuenta(), fechaInicio, fechaFinal);            
+            List<Movimiento> movimientosRango = movimientoRepository.findByNumeroCuentaAndFechaMovimiento(cuenta.getNumeroCuenta(), fechaInicio, fechaFinal);            
 
             List<MovimientoDto> movimientosDto = movimientosRango.stream().map(m->new MovimientoDto(m.getId(), m.getFechaMovimiento(), m.getValor(), m.getSaldo())).toList();
 

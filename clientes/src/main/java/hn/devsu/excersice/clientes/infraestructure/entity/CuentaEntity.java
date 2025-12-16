@@ -27,19 +27,19 @@ public class CuentaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="numeroCuenta")
+    @Column(name="numero_cuenta")
     private int numeroCuenta;
 
-    @Column(name= "tipoCuenta")
+    @Column(name= "tipo_cuenta")
     private String tipoCuenta;
 
-    @Column(name="saldoInicial")
+    @Column(name="saldo_inicial")
     private double saldoInicial;
 
     private boolean estado;
 
     @ManyToOne
-    @JoinColumn(name="idCliente", nullable=false )
+    @JoinColumn(name="id_cliente", nullable=false )
     private ClienteEntity cliente;
 
     @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL, orphanRemoval = true)

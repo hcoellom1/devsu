@@ -13,13 +13,14 @@ import hn.devsu.excersice.clientes.infraestructure.entity.MovimientoEntity;
 public interface MovimientoJpaRepository extends JpaRepository<MovimientoEntity, Integer>{
 
 
-    List<Movimiento> findByCuentaIdAndFechaMovimiento(Integer idCliente, 
+    List<Movimiento> findByCuenta_NumeroCuentaAndFechaMovimiento(Integer idCliente, 
                                                   LocalDateTime fechaInicio,
                                                   LocalDateTime fechaFin);
 
     @Query("""
-            select coalesce(sum(m.valor),0) from Movimiento m
-           where m.cuenta.id = :idCuenta
-           """)
-    double sumarMovimientos(@Param("idcuenta") Integer idCuenta);
+            select coalesce(sum(m.valor),0)
+            from MovimientoEntity m
+            where m.cuenta.numeroCuenta = :idCuenta
+            """)
+    double sumarMovimientos(@Param("idCuenta")Integer idCuenta);
 }
