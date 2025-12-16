@@ -1,8 +1,7 @@
-package hn.devsu.excersice.clientes.entities;
+package hn.devsu.excersice.clientes.infraestructure.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,16 +9,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="movimiento")
-@Data
-public class Movimiento {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class MovimientoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_movimiento")
     private int id;
 
     private LocalDateTime fechaMovimiento;
@@ -29,9 +33,7 @@ public class Movimiento {
     private double saldo;
 
     @ManyToOne
-    @JoinColumn(name="numero_cuenta", nullable = false )
-    private Cuenta cuenta;
-
-
+    @JoinColumn(name="numeroCuenta", nullable = false )
+    private CuentaEntity cuenta;
     
 }

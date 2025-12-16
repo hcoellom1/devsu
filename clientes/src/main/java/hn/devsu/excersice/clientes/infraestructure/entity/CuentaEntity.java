@@ -1,6 +1,4 @@
-package hn.devsu.excersice.clientes.entities;
-
-import lombok.Data;
+package hn.devsu.excersice.clientes.infraestructure.entity;
 
 import java.util.List;
 
@@ -14,29 +12,37 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name="cuenta")
-@Data
-public class Cuenta {
-    
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class CuentaEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="numero_cuenta")
+    @Column(name="numeroCuenta")
     private int numeroCuenta;
 
+    @Column(name= "tipoCuenta")
     private String tipoCuenta;
 
+    @Column(name="saldoInicial")
     private double saldoInicial;
 
     private boolean estado;
 
     @ManyToOne
-    @JoinColumn(name="id_cliente", nullable=false )
-    private Cliente cliente;
+    @JoinColumn(name="idCliente", nullable=false )
+    private ClienteEntity cliente;
 
     @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Movimiento> movimientos;
-
-
+    private List<MovimientoEntity> movimientos;
+    
 }

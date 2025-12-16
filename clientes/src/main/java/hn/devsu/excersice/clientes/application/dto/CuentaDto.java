@@ -1,4 +1,4 @@
-package hn.devsu.excersice.clientes.dtos;
+package hn.devsu.excersice.clientes.application.dto;
 
 import java.util.List;
 
@@ -18,6 +18,8 @@ public class CuentaDto {
     private double saldoInicial;    
 
     private boolean estado;
+
+    private double saldo;
 
     private List<MovimientoDto> movimientos;
 
