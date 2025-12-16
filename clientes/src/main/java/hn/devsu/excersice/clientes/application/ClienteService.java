@@ -11,6 +11,7 @@ import hn.devsu.excersice.clientes.application.dto.CuentaDto;
 import hn.devsu.excersice.clientes.application.dto.MovimientoDto;
 import hn.devsu.excersice.clientes.domain.Cliente;
 import hn.devsu.excersice.clientes.domain.Persona;
+import hn.devsu.excersice.clientes.domain.exception.NotClientFoundException;
 import hn.devsu.excersice.clientes.domain.repository.ClienteRepository;
 
 @Service
@@ -42,7 +43,7 @@ public class ClienteService {
     public ClienteDto obtenerClientePorId(int id){
         Cliente clienteBuscar = clienteRepository
                                     .findById(id)
-                                    .orElseThrow(() -> new RuntimeException("Cliente no existe"));
+                                    .orElseThrow(() -> new NotClientFoundException(id));
 
         List<CuentaDto> cuentasDto = Optional.ofNullable(clienteBuscar.getCuentas()).orElse(Collections.emptyList())
                                                   .stream()
@@ -120,9 +121,9 @@ public class ClienteService {
 
     public Cliente actualizarCliente(int idCliente, ClienteDto cliente){
         Cliente clienteActualizar = clienteRepository.findById(idCliente)
-                .orElseThrow(() -> new RuntimeException("Cliente no existe"));
+                .orElseThrow(() -> new NotClientFoundException(idCliente));
 
-        clienteActualizar.getPersona().setNombre(cliente.getNombre());
+                clienteActualizar.getPersona().setNombre(cliente.getNombre());
         clienteActualizar.getPersona().setTelefono(cliente.getTelefono());
         clienteActualizar.getPersona().setDireccion(cliente.getDireccion());
         clienteActualizar.getPersona().setEdad(cliente.getEdad());

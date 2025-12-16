@@ -12,6 +12,8 @@ import hn.devsu.excersice.clientes.application.dto.MovimientoDto;
 import hn.devsu.excersice.clientes.domain.Cliente;
 import hn.devsu.excersice.clientes.domain.Cuenta;
 import hn.devsu.excersice.clientes.domain.Movimiento;
+import hn.devsu.excersice.clientes.domain.exception.NotClientFoundException;
+import hn.devsu.excersice.clientes.domain.exception.NotCuentaFoundException;
 import hn.devsu.excersice.clientes.domain.repository.ClienteRepository;
 import hn.devsu.excersice.clientes.domain.repository.CuentaRepository;
 import hn.devsu.excersice.clientes.domain.repository.MovimientoRepository;
@@ -36,12 +38,13 @@ public class CuentaService {
 
     public CuentaDto crearCuenta(int idCliente, CuentaDto cuentaRequest){
         Cliente cliente = clienteRespository.findById(idCliente)
-        .orElseThrow(()-> new RuntimeException("No existe el cliente"));
+        .orElseThrow(()-> new NotClientFoundException(idCliente));
 
         Cuenta nvaCuenta = new Cuenta();
         nvaCuenta.setEstado(cuentaRequest.isEstado());
         nvaCuenta.setSaldoInicial(cuentaRequest.getSaldoInicial());
         nvaCuenta.setTipoCuenta(cuentaRequest.getTipoCuenta());
+        
 
         cliente.agregarCuenta(nvaCuenta);        
         
@@ -59,9 +62,9 @@ public class CuentaService {
 
 
     public CuentaDto obtenerCuentaPorId(int idCuenta){
-        Cuenta cuenta = cuentaRepository.findById(idCuenta);
+        Cuenta cuenta = cuentaRepository.findById(idCuenta).orElseThrow(()->new NotCuentaFoundException(idCuenta));
 
-        List<MovimientoDto> movimientos = cuenta.getMovimientos().stream()
+        List<MovimientoDto> movimientos = Optional.ofNullable(cuenta.getMovimientos()).orElse(Collections.emptyList()).stream()
         .map(m->new MovimientoDto(cuenta.getNumeroCuenta(), 
                                   m.getFechaMovimiento(),     
                                   m.getValor(), 
@@ -79,12 +82,12 @@ public class CuentaService {
 
     @Transactional
     public List<CuentaDto> obtenerCuentasPorCliente(int idCliente){
-        Cliente cliente = clienteRespository.findById(idCliente).orElseThrow(()-> new RuntimeException("No existe cliente"));
+        Cliente cliente = clienteRespository.findById(idCliente).orElseThrow(()-> new NotClientFoundException(idCliente));
 
         return cliente.getCuentas()
                         .stream()
                 .map(cuenta-> {
-                List<MovimientoDto> movimientoDtos = cuenta.getMovimientos().stream()
+                List<MovimientoDto> movimientoDtos = Optional.ofNullable(cuenta.getMovimientos()).orElse(Collections.emptyList()).stream()
                 .map(m->new MovimientoDto(m.getId(),
                         m.getFechaMovimiento(), 
                         m.getValor(),
@@ -123,7 +126,7 @@ public class CuentaService {
 
 
     public String actualizarCuenta(int idCuenta, CuentaDto cuentaReqest){
-        Cuenta cuenta = cuentaRepository.findById(idCuenta);
+        Cuenta cuenta = cuentaRepository.findById(idCuenta).orElseThrow(()-> new NotCuentaFoundException(idCuenta));
 
         cuenta.setEstado(cuentaReqest.isEstado());
         cuenta.setSaldoInicial(cuentaReqest.getSaldoInicial());

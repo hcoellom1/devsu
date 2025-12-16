@@ -1,5 +1,6 @@
 package hn.devsu.excersice.clientes.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +22,9 @@ public class Cliente {
     
     private Persona persona;
 
-    private List<Cuenta> cuentas;
+    private List<Cuenta> cuentas = new ArrayList<Cuenta>() {
+        
+    };
 
     public void agregarCuenta(Cuenta cuenta){
         cuentas.add(cuenta);

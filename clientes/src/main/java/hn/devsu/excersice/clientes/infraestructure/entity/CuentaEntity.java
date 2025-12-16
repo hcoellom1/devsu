@@ -1,5 +1,6 @@
 package hn.devsu.excersice.clientes.infraestructure.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -43,6 +44,6 @@ public class CuentaEntity {
     private ClienteEntity cliente;
 
     @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MovimientoEntity> movimientos;
+    private List<MovimientoEntity> movimientos = new ArrayList<>();
     
 }

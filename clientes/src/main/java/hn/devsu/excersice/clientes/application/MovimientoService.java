@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import hn.devsu.excersice.clientes.domain.Cuenta;
 import hn.devsu.excersice.clientes.domain.Movimiento;
+import hn.devsu.excersice.clientes.domain.exception.NotCuentaFoundException;
 import hn.devsu.excersice.clientes.domain.repository.CuentaRepository;
 
 @Service
@@ -18,11 +19,13 @@ public class MovimientoService {
     }
 
     public void registrarMovimiento(int idCuenta, double valor){
+        Cuenta cuenta = cuentaRepository.findById(idCuenta).orElseThrow(() -> new NotCuentaFoundException(idCuenta));
+
         Movimiento movimiento = new Movimiento();
         movimiento.setFechaMovimiento(LocalDateTime.now());
         movimiento.setValor(valor);
         
-        Cuenta cuenta = cuentaRepository.findById(idCuenta);
+        
         cuenta.registrarMovimiento(movimiento);
 
         cuentaRepository.save(cuenta);

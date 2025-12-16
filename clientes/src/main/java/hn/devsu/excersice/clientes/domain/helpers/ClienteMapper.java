@@ -1,8 +1,13 @@
 package hn.devsu.excersice.clientes.domain.helpers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hn.devsu.excersice.clientes.domain.Cliente;
+import hn.devsu.excersice.clientes.domain.Cuenta;
 import hn.devsu.excersice.clientes.domain.Persona;
 import hn.devsu.excersice.clientes.infraestructure.entity.ClienteEntity;
+import hn.devsu.excersice.clientes.infraestructure.entity.CuentaEntity;
 import hn.devsu.excersice.clientes.infraestructure.entity.PersonaEntity;
 
 public class ClienteMapper {
@@ -13,6 +18,7 @@ public class ClienteMapper {
         if(cliente== null) return null;
 
         ClienteEntity nvoCliente = new ClienteEntity();
+        nvoCliente.setId(cliente.getId());
         nvoCliente.setContrasenia(cliente.getContrasenia());
         nvoCliente.setEstado(cliente.isEstado());
 
@@ -23,10 +29,24 @@ public class ClienteMapper {
             nvaPersona.setEdad(cliente.getPersona().getEdad());
             nvaPersona.setDireccion((cliente.getPersona().getDireccion()));
             nvaPersona.setTelefono(cliente.getPersona().getTelefono());
-
+            nvaPersona.setId(cliente.getPersona().getId());
             nvoCliente.setPersonaEntity(nvaPersona);
         }
-        
+
+        List<CuentaEntity> cuentas = new ArrayList<>();
+        if(cliente.getCuentas()!=null){
+            for(Cuenta c: cliente.getCuentas()){
+                CuentaEntity ce = new CuentaEntity();
+                ce.setNumeroCuenta(c.getNumeroCuenta());
+                ce.setTipoCuenta(c.getTipoCuenta());
+                ce.setSaldoInicial(c.getSaldoInicial());
+                ce.setEstado(c.isEstado());
+                ce.setCliente(nvoCliente);
+
+                cuentas.add(ce);
+            }
+        }
+        nvoCliente.setCuentas(cuentas);
         return nvoCliente;
     }
 
@@ -48,6 +68,22 @@ public class ClienteMapper {
 
             nvoCliente.setPersona(persona);
         }
+
+        List<Cuenta> cuentas = new ArrayList<>();
+        if(clienteEntity.getCuentas()!=null){
+            for(CuentaEntity ce: clienteEntity.getCuentas()){
+                Cuenta c = new Cuenta();
+                c.setNumeroCuenta(ce.getNumeroCuenta());
+                c.setEstado(ce.isEstado());
+                c.setTipoCuenta(ce.getTipoCuenta());
+                c.setSaldoInicial(ce.getSaldoInicial());
+                
+                cuentas.add(c);
+            }
+
+        }
+
+        nvoCliente.setCuentas(cuentas);
 
         return nvoCliente;
 

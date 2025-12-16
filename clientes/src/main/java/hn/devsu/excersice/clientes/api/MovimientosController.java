@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @RestController
-@RequestMapping("api/movimientos")
+@RequestMapping("/api/movimientos")
 public class MovimientosController {
 
     private final MovimientoService movimientoService;
@@ -18,9 +18,9 @@ public class MovimientosController {
         this.movimientoService = movimientoService;
     }
 
-    @PostMapping("/regitrar")
-    public void registrarMovimiento(@RequestParam("idCuenta") int idCuenta, @RequestParam("valor") double valor) {
-        movimientoService.registrarMovimiento(idCuenta, valor);        
+    @PostMapping("/registrar")
+    public void registrarMovimiento(@RequestParam int cuenta, @RequestParam double valor) {
+        movimientoService.registrarMovimiento(cuenta, valor);        
     }
     
     

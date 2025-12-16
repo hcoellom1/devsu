@@ -1,6 +1,7 @@
 package hn.devsu.excersice.clientes.infraestructure.adapter;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -34,10 +35,8 @@ public class CuentaRepositoryAdapter implements CuentaRepository{
     }
 
     @Override
-    public Cuenta findById(Integer idCliente) {
-        CuentaEntity cuentaEntity = jpaRepository.findById(idCliente)
-                                            .orElseThrow(()-> new RuntimeException("No existe cuenta"));
-        return CuentaMapper.mapearAdominio(cuentaEntity);        
+    public Optional<Cuenta> findById(Integer idCliente) {
+        return jpaRepository.findById(idCliente).map(CuentaMapper::mapearAdominio);        
     }
 
     @Override
