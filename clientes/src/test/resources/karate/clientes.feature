@@ -21,3 +21,9 @@ Scenario: Crear cliente
     When method POST
     Then status 201
     And match response.codigoCliente != null
+
+Scenario: Obtener cliente por id
+    Given path 'api/clientes/obtener/1'
+    When method GET
+    Then status 200
+    And match response.nombre == 'Harold Coello'
