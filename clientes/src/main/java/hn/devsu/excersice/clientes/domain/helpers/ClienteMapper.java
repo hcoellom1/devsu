@@ -28,8 +28,7 @@ public class ClienteMapper {
             nvaPersona.setGenero(cliente.getPersona().getGenero());
             nvaPersona.setEdad(cliente.getPersona().getEdad());
             nvaPersona.setDireccion((cliente.getPersona().getDireccion()));
-            nvaPersona.setTelefono(cliente.getPersona().getTelefono());
-            nvaPersona.setId(cliente.getPersona().getId());
+            nvaPersona.setTelefono(cliente.getPersona().getTelefono());            
             nvoCliente.setPersonaEntity(nvaPersona);
         }
 

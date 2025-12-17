@@ -12,6 +12,13 @@ services:
       - "3306:3306"
     volumes: 
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5     
+    networks:
+      - cliente-net 
 
   cliente-api:
     build:
@@ -20,7 +27,8 @@ services:
     container_name: clientes-api
     restart: always
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
